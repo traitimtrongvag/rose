@@ -2,554 +2,568 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>  </title>
+  <title>bong hong nhoo</title>
   <style>
-    body {
-      height: 100vh;
-      width: 100vw;
-      margin: 0;
-      padding: 0;
-      background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
-      overflow: hidden;
-      position: relative;
-    }
+body {
+  height: 100vh;
+  width: 100vw;
+  background: #080f1a;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
 
-    /* Bầu trời đêm xoay 360 độ */
-    .night-sky {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(2px 2px at 20px 30px, #eee, transparent),
-        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
-        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
-        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
-        radial-gradient(2px 2px at 160px 30px, #fff, transparent),
-        radial-gradient(1px 1px at 200px 90px, rgba(255,255,255,0.9), transparent),
-        radial-gradient(2px 2px at 240px 50px, #eee, transparent),
-        radial-gradient(1px 1px at 280px 20px, rgba(255,255,255,0.7), transparent),
-        radial-gradient(1px 1px at 320px 100px, #fff, transparent),
-        radial-gradient(2px 2px at 350px 60px, rgba(255,255,255,0.8), transparent),
-        linear-gradient(to bottom, transparent 0%, rgba(13, 29, 49, 0.4) 50%, rgba(12, 13, 19, 0.8) 100%);
-      background-repeat: repeat;
-      background-size: 400px 300px;
-      animation: starRotation 120s linear infinite;
-      z-index: 1;
-    }
+/* Night Sky Background */
+.night-sky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, #1a237e 0%, #0d47a1 30%, #01579b 60%, #000051 100%);
+  animation: rotate-sky 120s linear infinite;
+  z-index: -2;
+}
 
-    /* Lớp sao xa hơn di chuyển chậm hơn */
-    .stars-layer-1 {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 150%;
-      height: 150%;
-      background: 
-        radial-gradient(1px 1px at 50px 50px, rgba(255,255,255,0.4), transparent),
-        radial-gradient(1px 1px at 150px 120px, rgba(255,255,255,0.3), transparent),
-        radial-gradient(1px 1px at 250px 80px, rgba(255,255,255,0.5), transparent),
-        radial-gradient(1px 1px at 350px 150px, rgba(255,255,255,0.2), transparent),
-        radial-gradient(1px 1px at 450px 70px, rgba(255,255,255,0.4), transparent);
-      background-repeat: repeat;
-      background-size: 500px 400px;
-      animation: starRotation 180s linear infinite reverse;
-      z-index: 0;
-    }
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+    radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+    radial-gradient(2px 2px at 160px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 200px 60px, #fff, transparent),
+    radial-gradient(2px 2px at 240px 90px, #fff, transparent),
+    radial-gradient(1px 1px at 280px 20px, #fff, transparent),
+    radial-gradient(1px 1px at 320px 50px, #fff, transparent),
+    radial-gradient(2px 2px at 360px 80px, #fff, transparent),
+    radial-gradient(1px 1px at 400px 30px, #fff, transparent),
+    radial-gradient(2px 2px at 440px 60px, #fff, transparent),
+    radial-gradient(1px 1px at 480px 90px, #fff, transparent),
+    radial-gradient(1px 1px at 520px 40px, #fff, transparent),
+    radial-gradient(2px 2px at 560px 70px, #fff, transparent);
+  background-repeat: repeat;
+  background-size: 600px 400px;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
 
-    /* Lớp sao gần hơn di chuyển nhanh hơn */
-    .stars-layer-2 {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 120%;
-      height: 120%;
-      background: 
-        radial-gradient(1.5px 1.5px at 80px 40px, rgba(255,255,255,0.9), transparent),
-        radial-gradient(1px 1px at 180px 100px, rgba(255,255,255,0.7), transparent),
-        radial-gradient(2px 2px at 280px 60px, rgba(255,255,255,0.8), transparent),
-        radial-gradient(1px 1px at 380px 140px, rgba(255,255,255,0.6), transparent);
-      background-repeat: repeat;
-      background-size: 450px 350px;
-      animation: starRotation 80s linear infinite, twinkle 3s ease-in-out infinite;
-      z-index: 2;
-    }
+.stars:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(1px 1px at 50px 100px, #ffeb3b, transparent),
+    radial-gradient(2px 2px at 100px 150px, #ffc107, transparent),
+    radial-gradient(1px 1px at 150px 200px, #fff9c4, transparent),
+    radial-gradient(1px 1px at 200px 250px, #ffffff, transparent),
+    radial-gradient(2px 2px at 250px 50px, #e1f5fe, transparent),
+    radial-gradient(1px 1px at 300px 100px, #ffffff, transparent),
+    radial-gradient(1px 1px at 350px 180px, #fff, transparent),
+    radial-gradient(2px 2px at 400px 220px, #ffeb3b, transparent),
+    radial-gradient(1px 1px at 450px 80px, #fff, transparent),
+    radial-gradient(1px 1px at 500px 140px, #ffc107, transparent);
+  background-repeat: repeat;
+  background-size: 550px 350px;
+  animation: twinkle-secondary 6s ease-in-out infinite alternate;
+}
 
-    /* Hiệu ứng sao băng */
-    .shooting-stars {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 3;
-    }
+.shooting-stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 
-    .shooting-star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: #fff;
-      border-radius: 50%;
-      opacity: 0;
-    }
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  animation: shoot linear infinite;
+}
 
-    .shooting-star:before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 300px;
-      height: 1px;
-      background: linear-gradient(90deg, #fff, transparent);
-      opacity: 0.7;
-    }
+.shooting-star:nth-child(1) {
+  top: 20%;
+  left: -5%;
+  animation: shoot1 8s linear infinite;
+  animation-delay: 2s;
+}
 
-    .shooting-star:nth-child(1) {
-      top: 20%;
-      left: -10%;
-      animation: shootingStar1 8s linear infinite;
-    }
+.shooting-star:nth-child(2) {
+  top: 40%;
+  left: -5%;
+  animation: shoot2 12s linear infinite;
+  animation-delay: 6s;
+}
 
-    .shooting-star:nth-child(2) {
-      top: 60%;
-      left: -10%;
-      animation: shootingStar2 12s linear infinite;
-      animation-delay: 3s;
-    }
+.shooting-star:nth-child(3) {
+  top: 60%;
+  left: -5%;
+  animation: shoot3 10s linear infinite;
+  animation-delay: 10s;
+}
 
-    .shooting-star:nth-child(3) {
-      top: 40%;
-      left: -10%;
-      animation: shootingStar3 15s linear infinite;
-      animation-delay: 8s;
-    }
+.shooting-star:nth-child(4) {
+  top: 80%;
+  left: -5%;
+  animation: shoot4 9s linear infinite;
+  animation-delay: 14s;
+}
 
-    .container {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-    }
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
 
-    .glass {
-      height: 350px;
-      width: 200px;
-      background: rgba(18, 33, 57, 0.9);
-      border-radius: 300px 300px 0px 0px;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
+.glass {
+  height: 350px;
+  width: 200px;
+  background: #122139;
+  border-radius: 300px 300px 0px 0px;
+}
+.glass:before {
+  content: "";
+  height: 10px;
+  width: 10px;
+  transform-origin: center;
+  border: 10px solid #122139;
+  border-radius: 100%;
+  position: absolute;
+  left: 87px;
+  top: -25px;
+}
+.glass:after {
+  content: "";
+  position: absolute;
+  height: 15px;
+  width: 250px;
+  background: #a52a2a;
+  top: 100%;
+  left: -13%;
+}
 
-    .glass:before {
-      content: "";
-      height: 10px;
-      width: 10px;
-      transform-origin: center;
-      border: 10px solid rgba(18, 33, 57, 0.9);
-      border-radius: 100%;
-      position: absolute;
-      left: 87px;
-      top: -25px;
-    }
+.shine {
+  width: 12px;
+  height: 140px;
+  background: white;
+  opacity: 0.2;
+  position: absolute;
+  left: 85%;
+  top: 80px;
+  border-radius: 100px;
+  z-index: 10;
+}
+.shine:before {
+  content: "";
+  width: 12px;
+  height: 20px;
+  position: absolute;
+  background: white;
+  top: 160px;
+  border-radius: 100px;
+}
 
-    .glass:after {
-      content: "";
-      position: absolute;
-      height: 15px;
-      width: 250px;
-      background: #a52a2a;
-      top: 100%;
-      left: -13%;
-    }
+.petals > div {
+  position: absolute;
+  background: #d52d58;
+  width: 45px;
+  height: 80px;
+  top: 55px;
+  transition: all 0.5s ease-out;
+}
+.petals > div:nth-child(1) {
+  border-radius: 15px;
+  box-shadow: 0px 0px 30px #f594b8;
+  left: 80px;
+  top: 60px;
+  background: #d52d58;
+}
+.petals > div:nth-child(2), .petals > div:nth-child(4), .petals > div:nth-child(6) {
+  background: #b81b43;
+  left: 60px;
+  border-radius: 0px 30px 0px 30px;
+  transform-origin: bottom right;
+}
+.petals > div:nth-child(3), .petals > div:nth-child(5), .petals > div:nth-child(7) {
+  background: #b81b43;
+  left: 100px;
+  border-radius: 30px 0px 30px 0px;
+  transform-origin: bottom left;
+}
+.petals > div:nth-child(2) {
+  z-index: 5;
+  background: #ab1a3f;
+  top: 75px;
+  height: 70px;
+  box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
+  animation: bloom2 3s ease-in-out;
+  animation-fill-mode: forwards;
+}
+.petals > div:nth-child(3) {
+  z-index: 4;
+  background: #ab1a3f;
+  top: 75px;
+  height: 70px;
+  box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
+  animation: bloom3 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+.petals > div:nth-child(4) {
+  z-index: 3;
+  background: #b81b43;
+  top: 70px;
+  height: 75px;
+  box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
+  animation: bloom4 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+.petals > div:nth-child(5) {
+  z-index: 2;
+  background: #b81b43;
+  top: 70px;
+  height: 75px;
+  box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
+  animation: bloom5 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+.petals > div:nth-child(6) {
+  z-index: 1;
+  background: #c9204b;
+  top: 65px;
+  height: 70px;
+  box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.3);
+  animation: bloom6 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+.petals > div:nth-child(7) {
+  z-index: 0;
+  background: #c9204b;
+  top: 65px;
+  height: 70px;
+  box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.3);
+  animation: bloom7 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
 
-    .shine {
-      width: 12px;
-      height: 140px;
-      background: rgba(255, 255, 255, 0.3);
-      position: absolute;
-      left: 85%;
-      top: 80px;
-      border-radius: 100px;
-      z-index: 10;
-      animation: glowShine 4s ease-in-out infinite;
-    }
+.deadPetals > div {
+  position: absolute;
+  background: #d52d58;
+  width: 20px;
+  height: 15px;
+  top: 120px;
+  border-radius: 0px 30px 0px 30px;
+  box-shadow: 0px 0px 30px rgba(245, 148, 184, 0.5);
+  transition: all 0.5s ease-out;
+}
+.deadPetals > div:nth-child(1) {
+  left: 67px;
+  transform: rotate(-30deg);
+  animation: falling 20s 4s ease-in-out infinite;
+}
+.deadPetals > div:nth-child(2) {
+  left: 104px;
+  transform: rotate(-30deg);
+  animation: falling 20s 8s ease-in-out infinite;
+}
+.deadPetals > div:nth-child(3) {
+  left: 91px;
+  transform: rotate(-30deg);
+  animation: falling 20s 12s ease-in-out infinite;
+}
+.deadPetals > div:nth-child(4) {
+  left: 69px;
+  transform: rotate(-30deg);
+  animation: falling 20s 16s ease-in-out infinite;
+}
 
-    .shine:before {
-      content: "";
-      width: 12px;
-      height: 20px;
-      position: absolute;
-      background: rgba(255, 255, 255, 0.3);
-      top: 160px;
-      border-radius: 100px;
-    }
+.leaves > div:nth-last-child(1) {
+  position: absolute;
+  width: 55px;
+  height: 30px;
+  background: #338f37;
+  top: 120px;
+  left: 75px;
+  border-radius: 100px;
+}
+.leaves > div:nth-child(1) {
+  position: absolute;
+  width: 6px;
+  height: 210px;
+  background: #054c05;
+  top: 95px;
+  left: 100px;
+  border-radius: 0 0 100px 100px;
+}
+.leaves > div:nth-child(2) {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  top: 53px;
+  border-radius: 5px 40px 20px 40px;
+  background: #054c05;
+  transform-origin: bottom;
+  transform: rotate(-30deg);
+  top: 180px;
+  left: 80px;
+  box-shadow: inset 5px 5px #066406;
+}
+.leaves > div:nth-child(3) {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  top: 53px;
+  border-radius: 40px 5px 40px 20px;
+  background: #054c05;
+  transform-origin: bottom;
+  transform: rotate(30deg);
+  top: 150px;
+  left: 95px;
+  box-shadow: inset -5px 5px #066406;
+}
 
-    .petals > div {
-      position: absolute;
-      background: #d52d58;
-      width: 45px;
-      height: 80px;
-      top: 55px;
-      transition: all 0.5s ease-out;
-    }
+.thorns > div {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 140px;
+}
+.thorns > div:nth-child(odd) {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #054c05;
+  left: 105px;
+}
+.thorns > div:nth-child(even) {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #054c05;
+  left: 95px;
+}
+.thorns > div:nth-child(1) {
+  top: 200px;
+}
+.thorns > div:nth-child(2) {
+  top: 170px;
+}
+.thorns > div:nth-child(4) {
+  top: 230px;
+}
 
-    .petals > div:nth-child(1) {
-      border-radius: 15px;
-      box-shadow: 0px 0px 30px #f594b8, 0px 0px 60px rgba(245, 148, 184, 0.3);
-      left: 80px;
-      top: 60px;
-      background: #d52d58;
-    }
+/* Night Sky Animations */
+@keyframes rotate-sky {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
-    .petals > div:nth-child(2), .petals > div:nth-child(4), .petals > div:nth-child(6) {
-      background: #b81b43;
-      left: 60px;
-      border-radius: 0px 30px 0px 30px;
-      transform-origin: bottom right;
-    }
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
 
-    .petals > div:nth-child(3), .petals > div:nth-child(5), .petals > div:nth-child(7) {
-      background: #b81b43;
-      left: 100px;
-      border-radius: 30px 0px 30px 0px;
-      transform-origin: bottom left;
-    }
+@keyframes twinkle-secondary {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
 
-    .petals > div:nth-child(2) {
-      z-index: 5;
-      background: #ab1a3f;
-      top: 75px;
-      height: 70px;
-      box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
-      animation: bloom2 3s ease-in-out, romanticGlow 4s ease-in-out infinite;
-      animation-fill-mode: forwards;
-    }
+@keyframes shoot1 {
+  0% {
+    transform: translateX(-5px) translateY(0);
+    opacity: 1;
+    box-shadow: 0 0 6px 2px #fff;
+  }
+  70% {
+    opacity: 1;
+    box-shadow: 0 0 6px 2px #fff;
+  }
+  100% {
+    transform: translateX(110vw) translateY(50px);
+    opacity: 0;
+  }
+}
 
-    .petals > div:nth-child(3) {
-      z-index: 4;
-      background: #ab1a3f;
-      top: 75px;
-      height: 70px;
-      box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
-      animation: bloom3 3s ease-in-out, glowing 2.5s ease-in-out infinite, romanticGlow 4s ease-in-out infinite;
-      animation-fill-mode: forwards;
-    }
+@keyframes shoot2 {
+  0% {
+    transform: translateX(-5px) translateY(0);
+    opacity: 1;
+    box-shadow: 0 0 6px 2px #ffeb3b;
+  }
+  70% {
+    opacity: 1;
+    box-shadow: 0 0 6px 2px #ffeb3b;
+  }
+  100% {
+    transform: translateX(110vw) translateY(-30px);
+    opacity: 0;
+  }
+}
 
-    .petals > div:nth-child(4) {
-      z-index: 3;
-      background: #b81b43;
-      top: 70px;
-      height: 75px;
-      box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
-      animation: bloom4 3s ease-in-out, glowing 2.5s ease-in-out infinite, romanticGlow 4s ease-in-out infinite;
-      animation-fill-mode: forwards;
-    }
+@keyframes shoot3 {
+  0% {
+    transform: translateX(-5px) translateY(0);
+    opacity: 1;
+    box-shadow: 0 0 6px 2px #e1f5fe;
+  }
+  70% {
+    opacity: 1;
+    box-shadow: 0 0 6px 2px #e1f5fe;
+  }
+  100% {
+    transform: translateX(110vw) translateY(40px);
+    opacity: 0;
+  }
+}
 
-    .petals > div:nth-child(5) {
-      z-index: 2;
-      background: #b81b43;
-      top: 70px;
-      height: 75px;
-      box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
-      animation: bloom5 3s ease-in-out, glowing 2.5s ease-in-out infinite, romanticGlow 4s ease-in-out infinite;
-      animation-fill-mode: forwards;
-    }
+@keyframes shoot4 {
+  0% {
+    transform: translateX(-5px) translateY(0);
+    opacity: 1;
+    box-shadow: 0 0 6px 2px #ffc107;
+  }
+  70% {
+    opacity: 1;
+    box-shadow: 0 0 6px 2px #ffc107;
+  }
+  100% {
+    transform: translateX(110vw) translateY(-20px);
+    opacity: 0;
+  }
+}
 
-    .petals > div:nth-child(6) {
-      z-index: 1;
-      background: #c9204b;
-      top: 65px;
-      height: 70px;
-      box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.3);
-      animation: bloom6 3s ease-in-out, glowing 2.5s ease-in-out infinite, romanticGlow 4s ease-in-out infinite;
-      animation-fill-mode: forwards;
-    }
-
-    .petals > div:nth-child(7) {
-      z-index: 0;
-      background: #c9204b;
-      top: 65px;
-      height: 70px;
-      box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.3);
-      animation: bloom7 3s ease-in-out, glowing 2.5s ease-in-out infinite, romanticGlow 4s ease-in-out infinite;
-      animation-fill-mode: forwards;
-    }
-
-    .deadPetals > div {
-      position: absolute;
-      background: #d52d58;
-      width: 20px;
-      height: 15px;
-      top: 120px;
-      border-radius: 0px 30px 0px 30px;
-      box-shadow: 0px 0px 30px rgba(245, 148, 184, 0.5);
-      transition: all 0.5s ease-out;
-    }
-
-    .deadPetals > div:nth-child(1) {
-      left: 67px;
-      transform: rotate(-30deg);
-      animation: falling 20s 4s ease-in-out infinite;
-    }
-
-    .deadPetals > div:nth-child(2) {
-      left: 104px;
-      transform: rotate(-30deg);
-      animation: falling 20s 8s ease-in-out infinite;
-    }
-
-    .deadPetals > div:nth-child(3) {
-      left: 91px;
-      transform: rotate(-30deg);
-      animation: falling 20s 12s ease-in-out infinite;
-    }
-
-    .deadPetals > div:nth-child(4) {
-      left: 69px;
-      transform: rotate(-30deg);
-      animation: falling 20s 16s ease-in-out infinite;
-    }
-
-    .leaves > div:nth-last-child(1) {
-      position: absolute;
-      width: 55px;
-      height: 30px;
-      background: #338f37;
-      top: 120px;
-      left: 75px;
-      border-radius: 100px;
-    }
-
-    .leaves > div:nth-child(1) {
-      position: absolute;
-      width: 6px;
-      height: 210px;
-      background: #054c05;
-      top: 95px;
-      left: 100px;
-      border-radius: 0 0 100px 100px;
-    }
-
-    .leaves > div:nth-child(2) {
-      position: absolute;
-      width: 30px;
-      height: 50px;
-      top: 53px;
-      border-radius: 5px 40px 20px 40px;
-      background: #054c05;
-      transform-origin: bottom;
-      transform: rotate(-30deg);
-      top: 180px;
-      left: 80px;
-      box-shadow: inset 5px 5px #066406;
-    }
-
-    .leaves > div:nth-child(3) {
-      position: absolute;
-      width: 30px;
-      height: 50px;
-      top: 53px;
-      border-radius: 40px 5px 40px 20px;
-      background: #054c05;
-      transform-origin: bottom;
-      transform: rotate(30deg);
-      top: 150px;
-      left: 95px;
-      box-shadow: inset -5px 5px #066406;
-    }
-
-    .thorns > div {
-      position: absolute;
-      width: 0;
-      height: 0;
-      top: 140px;
-    }
-
-    .thorns > div:nth-child(odd) {
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 5px solid #054c05;
-      left: 105px;
-    }
-
-    .thorns > div:nth-child(even) {
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 5px solid #054c05;
-      left: 95px;
-    }
-
-    .thorns > div:nth-child(1) {
-      top: 200px;
-    }
-
-    .thorns > div:nth-child(2) {
-      top: 170px;
-    }
-
-    .thorns > div:nth-child(4) {
-      top: 230px;
-    }
-
-    /* Animations */
-    @keyframes starRotation {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.8; }
-      50% { opacity: 0.3; }
-    }
-
-    @keyframes shootingStar1 {
-      0% { opacity: 0; transform: translateX(0) translateY(0); }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { opacity: 0; transform: translateX(120vw) translateY(20vh); }
-    }
-
-    @keyframes shootingStar2 {
-      0% { opacity: 0; transform: translateX(0) translateY(0); }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { opacity: 0; transform: translateX(120vw) translateY(15vh); }
-    }
-
-    @keyframes shootingStar3 {
-      0% { opacity: 0; transform: translateX(0) translateY(0); }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { opacity: 0; transform: translateX(120vw) translateY(25vh); }
-    }
-
-    @keyframes glowShine {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.6; }
-    }
-
-    @keyframes romanticGlow {
-      0%, 100% { 
-        box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
-      }
-      50% { 
-        box-shadow: 0px 0px 80px rgba(245, 148, 184, 0.8), 0px 0px 120px rgba(245, 148, 184, 0.4);
-      }
-    }
-
-    @keyframes bloom2 {
-      50% {
-        transform: rotate(-90deg);
-        top: 200px;
-        left: 100px;
-      }
-      100% {
-        transform: rotate(-60deg);
-        top: 252px;
-        left: 50px;
-        background: #71122a;
-        box-shadow: 0px 0px 0px rgba(245, 148, 184, 0);
-      }
-    }
-
-    @keyframes bloom3 {
-      100% {
-        transform: rotate(45deg);
-      }
-    }
-
-    @keyframes bloom4 {
-      100% {
-        transform: rotate(-20deg);
-      }
-    }
-
-    @keyframes bloom5 {
-      100% {
-        transform: rotate(20deg);
-      }
-    }
-
-    @keyframes bloom6 {
-      100% {
-        transform: rotate(-5deg);
-      }
-    }
-
-    @keyframes bloom7 {
-      100% {
-        transform: rotate(5deg);
-      }
-    }
-
-    @keyframes glowing {
-      50% {
-        background: #d7365f;
-        box-shadow: 0px 0px 60px #f594b8;
-      }
-    }
-
-    @keyframes falling {
-      20% {
-        top: 335px;
-        background: #9d193b;
-        box-shadow: 0px 0px 0px rgba(245, 148, 184, 0);
-      }
-      100% {
-        top: 335px;
-        opacity: 0;
-      }
-    }
+/* Original Rose Animations */
+@keyframes bloom2 {
+  50% {
+    transform: rotate(-90deg);
+    top: 200px;
+    left: 100px;
+  }
+  100% {
+    transform: rotate(-60deg);
+    top: 252px;
+    left: 50px;
+    background: #71122a;
+    box-shadow: 0px 0px 0px rgba(245, 148, 184, 0);
+  }
+}
+@keyframes bloom3 {
+  100% {
+    transform: rotate(45deg);
+  }
+}
+@keyframes bloom4 {
+  100% {
+    transform: rotate(-20deg);
+  }
+}
+@keyframes bloom5 {
+  100% {
+    transform: rotate(20deg);
+  }
+}
+@keyframes bloom6 {
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+@keyframes bloom7 {
+  100% {
+    transform: rotate(5deg);
+  }
+}
+@keyframes glowing {
+  50% {
+    background: #d7365f;
+    box-shadow: 0px 0px 60px #f594b8;
+  }
+}
+@keyframes falling {
+  20% {
+    top: 335px;
+    background: #9d193b;
+    box-shadow: 0px 0px 0px rgba(245, 148, 184, 0);
+  }
+  100% {
+    top: 335px;
+    opacity: 0;
+  }
+}
   </style>
 </head>
+
 <body>
-  <!-- Bầu trời đêm với các lớp sao -->
-  <div class="stars-layer-1"></div>
-  <div class="night-sky"></div>
-  <div class="stars-layer-2"></div>
-  
-  <!-- Sao băng -->
+<!-- Night Sky Background -->
+<div class="night-sky">
+  <div class="stars"></div>
   <div class="shooting-stars">
     <div class="shooting-star"></div>
     <div class="shooting-star"></div>
     <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
   </div>
+</div>
 
-  <!-- Bông hoa hồng -->
-  <div class="container">
-    <div class="glass">
-      <div class="shine"></div>
-    </div>
-    <div class="thorns">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div class="leaves">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div class="petals">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div class="deadPetals">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+<audio id="hiddenAudio" autoplay="autopaly" loop="loop">
+  <source src="music.mp3" type="audio/mpeg">
+  <source src="music.ogg" />
+</audio>
+
+<div class="container">
+  <div class="glass">
+    <div class="shine"></div>
   </div>
+  <div class="thorns">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="leaves">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="petals">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="deadPetals">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>  
 </body>
 </html>
